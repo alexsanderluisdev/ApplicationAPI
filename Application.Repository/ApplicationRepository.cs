@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Data.SqlClient;
 using Dapper;
-using System.Configuration;
 using System.Linq;
+using Microsoft.Extensions.Configuration;
 
 namespace Application.Repository
 {
     public class ApplicationRepository : Domain.Interfaces.IApplicationRepository
     {
         private string _connectionString;
-        public ApplicationRepository()
+        public ApplicationRepository(IConfiguration configuration)
         {
-            _connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            _connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
         public ApplicationRepository(string connectionString)
@@ -24,11 +24,7 @@ namespace Application.Repository
             using (SqlConnection conexao = new SqlConnection(_connectionString))
             {
                 return conexao.Query<Models.Application.Application>(
-                    "SELECT E.SiglaEstado, E.NomeEstado, E.NomeCapital, " +
-                           "R.NomeRegiao " +
-                    "FROM dbo.Estados E " +
-                    "INNER JOIN dbo.Regioes R ON R.IdRegiao = E.IdRegiao " +
-                    "ORDER BY E.NomeEstado").ToList();
+                    "SELECT * FROM Application ORDER BY ApplicationId ASC").ToList();
             }
         }
         public Models.Application.Application Get(int Id)

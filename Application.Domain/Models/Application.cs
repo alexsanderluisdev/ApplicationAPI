@@ -7,6 +7,11 @@
         public string PathLocal { get; set; }
         public bool DebuggingMode { get; set; }
 
+        public Application()
+        {
+
+        }
+
         public Application(int Id, string Url, string PathLocal, bool DebuggingMode)
         {
             this.Id = Id;
