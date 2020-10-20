@@ -29,6 +29,9 @@ namespace Application
                        .AllowAnyHeader();
             }));
 
+            // Configurando o serviço de documentação do Swagger
+            services.AddSwaggerGen();
+
             services.AddControllers();
 
             services.AddControllers().AddJsonOptions(options => {
@@ -48,6 +51,16 @@ namespace Application
             }
 
             app.UseCors("CorsPolicy");
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Documentação");
+            });
 
             app.UseHttpsRedirection();
 
