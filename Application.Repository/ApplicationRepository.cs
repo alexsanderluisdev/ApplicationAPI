@@ -27,6 +27,7 @@ namespace Application.Repository
                     "SELECT * FROM Application ORDER BY ApplicationId ASC").ToList();
             }
         }
+
         public Models.Application.Application Get(int Id)
         {
             using (SqlConnection conexao = new SqlConnection(_connectionString))
@@ -35,26 +36,29 @@ namespace Application.Repository
                     "SELECT * FROM Application WHERE ApplicationId = @Id", new { Id });
             }
         }
+
         public Models.Application.Application Update(Models.Application.Application application)
         {
             using (SqlConnection conexao = new SqlConnection(_connectionString))
             {
                 conexao.Execute(
-                    "UPDATE Application SET Url = @Url, PathLocal = @PathLocal, DebuggingMode = @DebuggingMode WHERE ApplicationId = @Id", application);
+                    "UPDATE Application SET Url = @Url, PathLocal = @PathLocal, DebuggingMode = @DebuggingMode WHERE ApplicationId = @ApplicationId", application);
             }
 
             return application;
         }
+
         public Models.Application.Application Add(Models.Application.Application application)
         {
             using (SqlConnection conexao = new SqlConnection(_connectionString))
             {
                 conexao.Execute(
-                    "INSERT INTO Application VALUES (@Id, @Url, @PathLocal, @DebuggingMode)", application);
+                    "INSERT INTO Application VALUES (@ApplicationId, @Url, @PathLocal, @DebuggingMode)", application);
             }
 
             return application;
         }
+
         public bool Delete(int Id)
         {
             using (SqlConnection conexao = new SqlConnection(_connectionString))

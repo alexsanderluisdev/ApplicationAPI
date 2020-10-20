@@ -26,6 +26,7 @@ namespace Application.Tests
             applicationBusiness = new ApplicationBusiness(applicationRepository);
         }
 
+
         [Test]
         [TestCaseSource("applications")]
         public void Add(Models.Application.Application application)
@@ -35,6 +36,16 @@ namespace Application.Tests
             Assert.AreEqual(applicationAdded.Url, application.Url);
             Assert.AreEqual(applicationAdded.PathLocal, application.PathLocal);
             Assert.AreEqual(applicationAdded.DebuggingMode, application.DebuggingMode);
+        }
+
+        [Test]
+        [TestCaseSource("applications")]
+        public void Get(Models.Application.Application application)
+        {
+            Models.Application.Application applicationGet = applicationBusiness.Get(application.ApplicationId);
+
+            Assert.IsNotNull(applicationGet);
+            Assert.AreEqual(applicationGet.ApplicationId, application.ApplicationId);
         }
 
         [Test]
@@ -56,7 +67,7 @@ namespace Application.Tests
         [TestCaseSource("applications")]
         public void Delete(Models.Application.Application application)
         {
-            bool success = applicationBusiness.Delete(application.Id);
+            bool success = applicationBusiness.Delete(application.ApplicationId);
 
             Assert.IsTrue(success);
         }
