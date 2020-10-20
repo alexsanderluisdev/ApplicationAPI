@@ -22,7 +22,7 @@ namespace Application.Tests
 
         public ApplicationBusinessTests()
         {
-            applicationRepository = new ApplicationRepository();
+            applicationRepository = new ApplicationRepository("Server=localhost\\SQLEXPRESS;Database=MyDatabase;Trusted_Connection=True;MultipleActiveResultSets=true");
             applicationBusiness = new ApplicationBusiness(applicationRepository);
         }
 
@@ -34,22 +34,22 @@ namespace Application.Tests
             
             Assert.AreEqual(applicationAdded.Url, application.Url);
             Assert.AreEqual(applicationAdded.PathLocal, application.PathLocal);
-            Assert.AreEqual(applicationAdded.DebbugingMode, application.DebbugingMode);
+            Assert.AreEqual(applicationAdded.DebuggingMode, application.DebuggingMode);
         }
 
         [Test]
         [TestCaseSource("applications")]
         public void Update(Models.Application.Application application)
         {
-            application.Url = application.Url + " updated";
-            application.PathLocal = application.PathLocal + " updated";
-            application.DebbugingMode = !application.DebbugingMode;
+            application.Url += " updated";
+            application.PathLocal += " updated";
+            application.DebuggingMode = !application.DebuggingMode;
 
-            Models.Application.Application applicationUpdated = applicationBusiness.Add(application);
+            Models.Application.Application applicationUpdated = applicationBusiness.Update(application);
 
             Assert.AreEqual(applicationUpdated.Url, application.Url);
             Assert.AreEqual(applicationUpdated.PathLocal, application.PathLocal);
-            Assert.AreEqual(applicationUpdated.DebbugingMode, application.DebbugingMode);
+            Assert.AreEqual(applicationUpdated.DebuggingMode, application.DebuggingMode);
         }
 
         [Test]
