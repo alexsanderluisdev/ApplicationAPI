@@ -1,6 +1,6 @@
 # Application
 
-WebApi em .Net Core utilizando Dapper com SQL Server, Injeção de Dependências e Testes Unitários.
+WebApi em .Net Core utilizando Dapper com SQL Server, Injeção de Dependências, Testes Unitários e Swagger.
 
 Como utilizar:
 
@@ -21,3 +21,5 @@ CREATE TABLE Application (
 ```
 
 Também é possível alterar a string de conexão no **appsetting.json** do projeto da WebApi ou no construtor da classe de teste unitário.
+
+Para ver a documentação, rodar a api e acessar o endereço https://localhost:44376/swagger/index.html
