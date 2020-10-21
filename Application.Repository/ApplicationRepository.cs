@@ -19,6 +19,10 @@ namespace Application.Repository
             _connectionString = connectionString;
         }
 
+        /// <summary>
+        /// Lista todas as aplicações.
+        /// </summary>
+        /// <returns>Uma lista com as aplicações populadas nos objetos.</returns>
         public List<Models.Application.Application> List()
         {
             using (SqlConnection conexao = new SqlConnection(_connectionString))
@@ -28,6 +32,11 @@ namespace Application.Repository
             }
         }
 
+        /// <summary>
+        /// Obtém uma aplicação com base no id informado.
+        /// </summary>
+        /// <param name="Id">Id da aplicação para ser retornada.</param>
+        /// <returns>Objeto populado com as informações da aplicação.</returns>
         public Models.Application.Application Get(int Id)
         {
             using (SqlConnection conexao = new SqlConnection(_connectionString))
@@ -37,6 +46,11 @@ namespace Application.Repository
             }
         }
 
+        /// <summary>
+        /// Atualiza as informações de uma aplicação.
+        /// </summary>
+        /// <param name="application">Objeto com as informações da aplicação para ser atualizada.</param>
+        /// <returns>Objeto com as informações da aplicação atualizada.</returns>
         public Models.Application.Application Update(Models.Application.Application application)
         {
             using (SqlConnection conexao = new SqlConnection(_connectionString))
@@ -48,6 +62,11 @@ namespace Application.Repository
             return application;
         }
 
+        /// <summary>
+        /// Adiciona uma aplicação na base de dados.
+        /// </summary>
+        /// <param name="application">Objeto com as informações da aplicação a ser inserida.</param>
+        /// <returns>Objeto com as informações da aplicação inserida.</returns>
         public Models.Application.Application Add(Models.Application.Application application)
         {
             using (SqlConnection conexao = new SqlConnection(_connectionString))
@@ -59,6 +78,11 @@ namespace Application.Repository
             return application;
         }
 
+        /// <summary>
+        /// Remove uma aplicação da base de dados.
+        /// </summary>
+        /// <param name="Id">Id da aplicação a ser removida.</param>
+        /// <returns>Retorna true em caso de sucesso.</returns>
         public bool Delete(int Id)
         {
             using (SqlConnection conexao = new SqlConnection(_connectionString))
