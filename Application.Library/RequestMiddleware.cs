@@ -6,23 +6,24 @@ namespace Application.Library
 {
     public class RequestMiddleware
     {
-        private readonly RequestDelegate next;
+        private readonly RequestDelegate _next;
 
         public RequestMiddleware(RequestDelegate next)
         {
-            this.next = next;
+            _next = next;
         }
 
         public async Task Invoke(HttpContext context)
         {
             try
             {
-                await next.Invoke(context);
+                await _next.Invoke(context);
             }
             catch (Exception ex)
             {
                 // exemplo de um middleware de exceções
                 // poderia ser colocado um logger aqui
+                throw ex;
             }
         }
     }
